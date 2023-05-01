@@ -4,7 +4,23 @@
 	var L = require('leaflet'),
 		corslite = require('@mapbox/corslite'),
 		polyline = require('@mapbox/polyline'),
-		osrmTextInstructions = require('osrm-text-instructions')('v5');
+		osrmTextInstructions = {
+			capitalizeFirstLetter: function(language, string) { return string; },
+			ordinalize: function(language, number) { return number; },
+			directionFromDegree: function(language, degree) { return degree; },
+			laneConfig: function(step) { return "lane-config-step"; },
+			getWayName: function(language, step, options) { return "get-way-name-step"; },
+			compile: function(language, step, opts) { return "compile-step"; },
+			grammarize: function(language, name, grammar) { return name; },
+			tokenize: function(language, instruction, tokens, options) { return instruction; },
+			abbreviations: {
+				'en': {
+					"abbreviations": {},
+					"classifications": {},
+					"directions": {},
+				},
+			},
+		};
 
 	// Ignore camelcase naming for this file, since OSRM's API uses
 	// underscores.
